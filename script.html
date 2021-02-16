@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Console Demo</title>
+  </head>
+  <body>
+
+    <h1>Rock Paper Scissors </h1>
+    <!-- <button myButton>myButton</button> -->
+    <script>
+
+// function game() that includes the playRound() that can be called 5 times in a row 
+// function keepScore that keeps score 
+// function reportWinner that console.logs to report winner and loser at the end. 
+
+
+
+// function computerPlay that randomly returns rock paper or scissors
+let computerPlay = function() {
+  
+  let n = Math.random();
+
+  if (n >= 0 && n <= 0.333333333) {
+    return computerSelection = "Rock";
+  }
+  else if (n > 0.333333333 && n <= 0.666666666) {
+    return computerSelection = "Paper";
+  }
+  else {
+    return computerSelection = "Scissors";
+  }
+}
+
+
+// function playRound (playerSelection, computerSelection)
+
+// let playRound = function(playerSelection, computerSelection)
+
+
+// playerSelection function is case insensitive (WIP)
+let playerSelection = function(playerPlay) {
+  if (playerPlay == /rock/i) {
+    return playerSelection = "Rock";
+     console.log(playerSelection);
+  }
+  else {
+    playerSelection = "Invalid";
+  }
+}
+// let playerSelection = "rock";
+// let computerSelection = computerPlay();
+// consle.log(playRound (playerSelection, computerSelection));
+// console.log to display the result of each round
+// function declareWinner to return a string that declares winner
+
+// prompt() to get input from user
+let playerPlay = prompt("Please input 'rock', 'paper' or 'scissors' to make your move!");
+
+    </script>
+  </body>
+</html>
