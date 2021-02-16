@@ -12,17 +12,28 @@
 
 let playerSelection;
 let computerSelection;
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
 
-// prompt() to get input from user
+// prompt() to get input from user and then toLowerCase so it's case insensitive
 playerSelection = prompt("Please input 'rock', 'paper' or 'scissors' to make your move!");
-
-// playerSelection toLowerCase so it's case insensitive
 playerSelection = playerSelection.toLowerCase();
+playRound (playerSelection, computerSelection)
+if (playerScore == 5 || computerScore == 5) {
+  declarewinner();
+}
 
-// function computerPlay that randomly returns rock, paper or scissors on computer's behalf
-let computerPlay = function() {
+// declare function game() that tallies playerScore and computerScore and ends the game when either reaches 5.
+function game (playerScore, computerScore) {
+  if (playerScore == 5) {
+    return console.log("Human has won 5 rounds! You win the game!");
+  } else if (computerScore == 5) {
+    return console.log("Computer has won 5 rounds! You lose the game!");
+  }
+}
+
+// declare function computerPlay that randomly returns rock, paper or scissors on computer's behalf
+function computerPlay() {
   
   let n = Math.random();
 
@@ -37,51 +48,48 @@ let computerPlay = function() {
   }
 };
 
-// function playRound (playerSelection, computerSelection) that outputs the result of a round
+// declare function playRound (playerSelection, computerSelection) that outputs the result of a round
 function playRound (playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
-    return "Tie Round!";
+    return `Tie Round! Humans: ${playerScore}, Computers ${computerScore}`;
   } 
   else if (playerSelection == "rock" && computerSelection == "paper") {
-    return "You lose! Paper beats rock", computerScore++;
+    ++computerScore;
+    return console.log(`You lose! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
   } 
   else if (playerSelection == "rock" && computerSelection == "scissors") {
-    return "You win! Rock beats scissors", humanScore++;
+    ++playerScore;
+    return console.log(`You win! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
   } 
   else if (playerSelection == "paper" && computerSelection == "rock") {
-    return "You win! Paper beats rock", humanScore++;
+    ++playerScore;
+    return console.log(`You win! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
   } 
   else if (playerSelection == "paper" && computerSelection == "scissors") {
-    return "You lose! Scissors beats paper", computerScore++;
+    ++computerScore;
+    return console.log(`You lose! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
   }
   else if (playerSelection == "scissors" && computerSelection == "paper") {
-    return "You win! Scissors beats paper", humanScore++;
+    ++playerScore;
+    return console.log(`You win! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
   } 
   else if (playerSelection == "scissors" && computerSelection == "rock") {
-    return "You lose! Rock beats scissors", computerScore++;
+    ++computerScore;
+    return console.log(`You lose! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
   }
   else {
     return "You glitched it!";
   }
-  // console.log to display the result of each round (doesn't seem to work)
-  console.log(playRound(playerSelection, computerSelection));
 }
 
-// function game() that tallies humanScore and computerScore and ends the game when either reaches 5.
-function game (humanScore, computerScore) {
-  if (humanScore == 5) {
-    console.log("Human has won 5 rounds! You win the game!");
-    break;
+// declare function declareWinner to return a string that declares winner
+function declareWinner(playerScore, computerScore) {
+  if (playerScore == 5) {
+    console.log("You win the game!");
   } else if (computerScore == 5) {
-    console.log("Computer has won 5 rounds! You lose the game!");
-    break;
-  }
+    console.log("You lose the game!");
+  } 
 }
-
-
-// function declareWinner to return a string that declares winner
-
-
 
     </script>
   </body>
