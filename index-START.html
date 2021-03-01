@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
 
@@ -24,7 +25,7 @@
   let playerScore = 0, computerScore = 0;
   let result = "";
 
-  // const selections = Array.from(document.querySelectorAll('.key'));
+  const selections = Array.from(document.querySelectorAll('.key'));
 
   // declare function computerPlay that randomly plays rock, paper or scissors on computer's behalf
   function computerPlay() {
@@ -76,22 +77,34 @@
       }
     }
   } 
+
+  function removeTransition(e) {
+    e.target.classList.remove('playing');
+  }
+  
   const scoreArea = document.querySelector("#scoreArea");
   let scoreText = document.createElement('div');
   scoreArea.appendChild(scoreText);
-  
 
   // when window clicked, function runs to assign e.srcElement.td playerSelection and playRound runs (calling computerPlay)
-  window.addEventListener('click', function(e){
+  window.addEventListener('click', function(e) {
+    let key = e.path[0];
+    let keyStr = key.toString(); 
+    //if (!key.includes('img')) return;
     playerSelection = e.srcElement.id;
+    console.log(e);
     playRound();
+    key.classList.add('playing');
     if (playerScore >= 5) {
-        alert("YOU WIN! Human has won 5 rounds. Press F5 to play again!");
+      alert("YOU WIN! Human has won 5 rounds. Press F5 to play again!");
     } else if (computerScore >= 5) {
-        alert("TRY AGAIN! Computer has won 5 rounds. Press F5 to play again!");
+      alert("TRY AGAIN! Computer has won 5 rounds. Press F5 to play again!");
     }
   });
+  
 
+  
+  selections.forEach(key => key.addEventListener('transitionEnd', removeTransition));
 
     </script>
   </body>
