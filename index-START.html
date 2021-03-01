@@ -5,15 +5,15 @@
   </head>
   <body>
 
-    <h1 style='text-align: center'>Rock Paper Scissors</h1>
+    <h1 style='text-align: center'>Rock Paper Scissors!</h1>
 
     <div class='selections' style='text-align: center'>
-      <img data-id='rock' class='key' src='rock.jpg' alt='rock'>
-      <img data-id='paper' class='key' src='paper.jpg' alt='paper'>
-      <img data-id='scissors' class='key' src='scissors.jpg' alt='scissors'>
+      <img id='rock' class='key' src='rock.jpg' alt='rock'>
+      <img id='paper' class='key' src='paper.jpg' alt='paper'>
+      <img id='scissors' class='key' src='scissors.jpg' alt='scissors'>
     </div>
 
-    <div>
+    <div style='text-align: center'>
       <p>Best of 5:</p>
       <p>`Player Score: ${playerScore}`</p>
       <p>Computer Score: `${computerScore}`</p>
@@ -21,15 +21,17 @@
     </div>
     
 <script>
+
+  let playerSelection;
   let computerSelection;
   let playerScore = 0;
   let computerScore = 0;
 
+  // const selections = Array.from(document.querySelectorAll('.key'));
+
   // declare function computerPlay that randomly plays rock, paper or scissors on computer's behalf
   function computerPlay() {
-    
     let n = Math.random();
-
     if (n >= 0 && n <= 0.333333333) {
       return computerSelection = "rock";
     }
@@ -43,63 +45,47 @@
 
   // declare function playRound () to play one round. Compares the result playerSelection with computerSelection, then returns the outcome and updates score.
   function playRound () {
-    if (playerSelection == computerSelection) {
-      return console.log(`Tie Round! Humans: ${playerScore}, Computers ${computerScore}`);
-    } 
-    else if (playerSelection == "rock" && computerSelection == "paper") {
-      ++computerScore;
-      return console.log(`You lose! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
-    } 
-    else if (playerSelection == "rock" && computerSelection == "scissors") {
-      ++playerScore;
-      return console.log(`You win! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
-    } 
-    else if (playerSelection == "paper" && computerSelection == "rock") {
-      ++playerScore;
-      return console.log(`You win! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
-    } 
-    else if (playerSelection == "paper" && computerSelection == "scissors") {
-      ++computerScore;
-      return console.log(`You lose! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
+    while (playerScore < 5 && computerScore < 5) {
+      computerPlay()
+      if (playerSelection == computerSelection) {
+          return console.log(`Tie Round! Humans: ${playerScore}, Computers ${computerScore}`);
+      } else if (playerSelection == "rock" && computerSelection == "paper") {
+          ++computerScore;
+          return console.log(`You lose! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
+      } else if (playerSelection == "rock" && computerSelection == "scissors") {
+          ++playerScore;
+          return console.log(`You win! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
+      } else if (playerSelection == "paper" && computerSelection == "rock") {
+          ++playerScore;
+          return console.log(`You win! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
+      } else if (playerSelection == "paper" && computerSelection == "scissors") {
+          ++computerScore;
+          return console.log(`You lose! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
+      } else if (playerSelection == "scissors" && computerSelection == "paper") {
+          ++playerScore;
+          return console.log(`You win! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
+      } else if (playerSelection == "scissors" && computerSelection == "rock") {
+          ++computerScore;
+          return console.log(`You lose! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
+      } else {
+          return console.log("Invalid input");
+      }
     }
-    else if (playerSelection == "scissors" && computerSelection == "paper") {
-      ++playerScore;
-      return console.log(`You win! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
-    } 
-    else if (playerSelection == "scissors" && computerSelection == "rock") {
-      ++computerScore;
-      return console.log(`You lose! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
-    }
-    else {
-      return console.log("Invalid input");
-    }
+  } 
+  
+
+
+  // when window clicked, function runs to assign e.srcElement.td playerSelection and playRound runs (calling computerPlay)
+  window.addEventListener('click', function(e){
+    playerSelection = e.srcElement.id;
+    playRound();
+  });
+
+  if (playerScore >= 5) {
+        console.log("GAME OVER! Human has won 5 rounds. Press F5 to play again!");
+  } else if (computerScore >= 5) {
+        console.log("GAME OVER! Computer has won 5 rounds. Press F5 to play again!");
   }
-
-  const buttons = Array.from(document.querySelectorAll('.key'));
-  buttons.addEventListener('click', playerPlay);
-
-  function playerPlay(e) {
- 
-    // let playerSelection = document.querySelector(`img[data-id='${}']`);
-    console.log(playerSelection);
-
-  }
-
-    // while loop runs playRound until both playerScore and computerScore are less than 5
-  while (playerScore <= 4 && computerScore <= 4) {
-    playRound (playerSelection, computerSelection);
-  }
-
-  // conditional statement announces winner when either side reaches 5 score 
-  if (playerScore == 5) {
-      console.log("Human has won 5 rounds! You win the game!");
-  } else if (computerScore == 5) {
-      console.log("Computer has won 5 rounds! You lose the game!");
-  }
-
-  alert("Press F5 to play again!");
-
-
     </script>
   </body>
 </html>
