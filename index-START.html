@@ -13,19 +13,16 @@
       <img id='scissors' class='key' src='scissors.jpg' alt='scissors'>
     </div>
 
-    <div style='text-align: center'>
+    <div id="scoreArea" style='text-align: center'>
       <p>Best of 5:</p>
-      <p>`Player Score: ${playerScore}`</p>
-      <p>Computer Score: `${computerScore}`</p>
 
     </div>
     
 <script>
 
-  let playerSelection;
-  let computerSelection;
-  let playerScore = 0;
-  let computerScore = 0;
+  let playerSelection, computerSelection;
+  let playerScore = 0, computerScore = 0;
+  let result = "";
 
   // const selections = Array.from(document.querySelectorAll('.key'));
 
@@ -43,49 +40,59 @@
     }
   };
 
-  // declare function playRound () to play one round. Compares the result playerSelection with computerSelection, then returns the outcome and updates score.
+  // declare function playRound () to play one round. Compares the result = playerSelection with computerSelection, then returns the outcome and updates score.
   function playRound () {
     while (playerScore < 5 && computerScore < 5) {
       computerPlay()
       if (playerSelection == computerSelection) {
-          return console.log(`Tie Round! Humans: ${playerScore}, Computers ${computerScore}`);
+          return scoreText.textContent = `Tie Round! Humans: ${playerScore}, Computers ${computerScore}`;
+      
       } else if (playerSelection == "rock" && computerSelection == "paper") {
           ++computerScore;
-          return console.log(`You lose! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
+          return scoreText.textContent = `Computer wins this round! Humans: ${playerScore}, Computers: ${computerScore}`;
+
       } else if (playerSelection == "rock" && computerSelection == "scissors") {
           ++playerScore;
-          return console.log(`You win! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
+          return scoreText.textContent = `You win this round! Humans: ${playerScore}, Computers: ${computerScore}`;
+
       } else if (playerSelection == "paper" && computerSelection == "rock") {
           ++playerScore;
-          return console.log(`You win! Paper beats rock. Humans: ${playerScore}, Computers ${computerScore}`);
+          return scoreText.textContent = `You win this round! Humans: ${playerScore}, Computers: ${computerScore}`;
+
       } else if (playerSelection == "paper" && computerSelection == "scissors") {
-          ++computerScore;
-          return console.log(`You lose! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
+          ++computerScore
+          return scoreText.textContent = `Computer wins this round! Humans: ${playerScore}, Computers: ${computerScore}`;
+
       } else if (playerSelection == "scissors" && computerSelection == "paper") {
           ++playerScore;
-          return console.log(`You win! Scissors beats paper. Humans: ${playerScore}, Computers ${computerScore}`);
+          return scoreText.textContent = `You win this round! Humans: ${playerScore}, Computers: ${computerScore}`;
+
       } else if (playerSelection == "scissors" && computerSelection == "rock") {
           ++computerScore;
-          return console.log(`You lose! Rock beats scissors. Humans: ${playerScore}, Computers ${computerScore}`);
+          return scoreText.textContent = `Computer wins this round! Humans: ${playerScore}, Computers: ${computerScore}`;
+
       } else {
           return console.log("Invalid input");
       }
     }
   } 
+  const scoreArea = document.querySelector("#scoreArea");
+  let scoreText = document.createElement('div');
+  scoreArea.appendChild(scoreText);
   
-
 
   // when window clicked, function runs to assign e.srcElement.td playerSelection and playRound runs (calling computerPlay)
   window.addEventListener('click', function(e){
     playerSelection = e.srcElement.id;
     playRound();
+    if (playerScore >= 5) {
+        alert("YOU WIN! Human has won 5 rounds. Press F5 to play again!");
+    } else if (computerScore >= 5) {
+        alert("TRY AGAIN! Computer has won 5 rounds. Press F5 to play again!");
+    }
   });
 
-  if (playerScore >= 5) {
-        console.log("GAME OVER! Human has won 5 rounds. Press F5 to play again!");
-  } else if (computerScore >= 5) {
-        console.log("GAME OVER! Computer has won 5 rounds. Press F5 to play again!");
-  }
+
     </script>
   </body>
 </html>
