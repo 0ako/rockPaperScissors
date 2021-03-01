@@ -6,17 +6,16 @@
   </head>
   <body>
 
-    <h1 style='text-align: center'>Rock Paper Scissors!</h1>
+    <h1>Rock Paper Scissors!</h1>
 
-    <div class='selections' style='text-align: center'>
+    <div class='selections'>
       <img id='rock' class='key' src='rock.jpg' alt='rock'>
       <img id='paper' class='key' src='paper.jpg' alt='paper'>
       <img id='scissors' class='key' src='scissors.jpg' alt='scissors'>
     </div>
 
-    <div id="scoreArea" style='text-align: center'>
+    <div id="scoreArea">
       <p>Best of 5:</p>
-
     </div>
     
 <script>
@@ -88,9 +87,9 @@
 
   // when window clicked, function runs to assign e.srcElement.td playerSelection and playRound runs (calling computerPlay)
   window.addEventListener('click', function(e) {
-    let key = e.path[0];
-    let keyStr = key.toString(); 
-    //if (!key.includes('img')) return;
+    key = e.path[0];
+    keyStr = key.toString(); 
+    if (!keyStr.includes('Image')) return;
     playerSelection = e.srcElement.id;
     console.log(e);
     playRound();
@@ -102,9 +101,7 @@
     }
   });
   
-
-  
-  selections.forEach(key => key.addEventListener('transitionEnd', removeTransition));
+  selections.forEach(key => key.addEventListener('transitionend', removeTransition));
 
     </script>
   </body>
